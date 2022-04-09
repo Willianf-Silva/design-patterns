@@ -16,12 +16,17 @@ public class DescontoParaOrcamentoComMaisDeCincoItens extends DescontoHandler{
 
 	/**
 	 * Realiza o calculo necessário para esse desconto
-	 * Se não for aplicado, ele chama o próximo desconto
 	 */
-	public BigDecimal calcular(Orcamento orcamento) {
-		if (orcamento.getQuantidadeItens() > 5) {
-			return orcamento.getValor().multiply(new BigDecimal("0.1"));
-		}
-		return proximo.calcular(orcamento);
+	@Override
+	public BigDecimal efetuarCalculo(Orcamento orcamento) {
+		return orcamento.getValor().multiply(new BigDecimal("0.1"));
+	}
+
+	/**
+	 * Lógica para aplicar esse tipo de desconto
+	 */
+	@Override
+	public boolean deveAplicarDesconto(Orcamento orcamento) {
+		return orcamento.getQuantidadeItens() > 5;
 	};
 }

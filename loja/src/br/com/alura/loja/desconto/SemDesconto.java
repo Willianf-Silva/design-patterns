@@ -16,7 +16,13 @@ public class SemDesconto extends DescontoHandler {
 	/**
 	 * Retorna zero informando que não existe desconto
 	 */
-	public BigDecimal calcular(Orcamento orcamento) {
+	@Override
+	public BigDecimal efetuarCalculo(Orcamento orcamento) {
 		return BigDecimal.ZERO;
+	}
+
+	@Override
+	public boolean deveAplicarDesconto(Orcamento orcamento) {
+		return true;
 	};
 }

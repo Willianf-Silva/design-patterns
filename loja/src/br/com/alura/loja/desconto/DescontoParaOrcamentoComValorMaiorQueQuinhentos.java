@@ -16,12 +16,17 @@ public class DescontoParaOrcamentoComValorMaiorQueQuinhentos extends DescontoHan
 
 	/**
 	 * Realiza o calculo necessário para esse desconto
-	 * Se não for aplicado, ele chama o próximo desconto
 	 */
-	public BigDecimal calcular(Orcamento orcamento) {
-		if (orcamento.getValor().compareTo(new BigDecimal("500")) > 0) {
-			return orcamento.getValor().multiply(new BigDecimal("0.05"));
-		}
-		return proximo.calcular(orcamento);
+	@Override
+	public BigDecimal efetuarCalculo(Orcamento orcamento) {
+		return orcamento.getValor().multiply(new BigDecimal("0.05"));
+	}
+
+	/**
+	 * Lógica para aplicar esse tipo de desconto
+	 */
+	@Override
+	public boolean deveAplicarDesconto(Orcamento orcamento) {
+		return orcamento.getValor().compareTo(new BigDecimal("500")) > 0;
 	};
 }
